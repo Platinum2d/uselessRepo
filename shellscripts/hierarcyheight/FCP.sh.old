@@ -1,0 +1,33 @@
+#!/bin/sh
+#script che fornisce il cammino massimo all'interno di una gerarchia di cartelle
+#es.: ./height [percorso di una cartella nella posizione corrente]
+
+#controllo parametri
+case $# in 
+   1) case $1 in #controllo del numero dei parametri (deve essere esattamente 1)
+         /*) echo "error: absolute path is not allowed" #controllo che non sia un percorso assoluto
+	     exit 1;;
+      esac
+      if test ! -d $1 -o ! -x $1 #controllo che la cartella esista e sia accessibile
+      then
+         echo "error: not a directory or not accessible"
+         exit 2
+      fi;;
+   *) echo "usage: $0 [directory in current path]" 
+      exit 3;;
+esac
+ #elimino il file di supporto
+startpath=`pwd`/$1
+
+mem=`pwd` #memorizzo il path corrente per tornarci una volta terminata la ricorsione
+PATH=`pwd`:$PATH #append del path corrente per permettere la ricorsione
+export PATH
+
+echo "0" > repval #creo il file in cui andrò a memorizzare il numero massimo temporaneo di livelli gerarchici di directory attraversati
+cd $startpath #entro nel punto di partenza specificato dall'utente
+FCR.sh 0 $mem #parametri: livello attuale di attraversamento
+cd $mem
+echo "Numero di livelli: `cat repval`"
+rm repval #elimino il file di supporto
+
+exit 0

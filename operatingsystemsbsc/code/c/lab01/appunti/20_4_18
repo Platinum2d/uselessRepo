@@ -1,0 +1,12 @@
+La differenza tra le metafore FILE* e quello che stiamo vedendo adesso è solo nella sintassi, o quasi. L'implementazione tramite file descriptor è la cosa più "raw", più di basso livello che abbiamo.
+
+Vediamo ora un codice del genere
+
+int main(int argc, char **argv)
+{
+   char mystring[] = "daghe ";
+
+   return 0;
+}
+
+
