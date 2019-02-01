@@ -1,0 +1,79 @@
+{% extends "base_navigation_bar.html" %}
+{% load static %}
+
+{% block title %}{{ footballer.name }} {{ footballer.surname }}{% endblock title %}
+
+{% block content %}
+    <div align="center">
+        <img src="{% static 'images/footballer.png' %}" style="height: 180px; width: 180px"><br>
+        <h1>{{ footballer.name }} {{ footballer.surname }}</h1>
+    </div>
+    <br><br>
+    <hr>
+    <table>
+        <thead></thead>
+
+        <tbody>
+        <tr>
+            <td rowspan="3" style="padding-right: 20px">
+                <img src="{% static 'icons/' %}{{ footballer.club.name }}.png" style="height: 100px; width: 100px">
+            </td>
+            <td>
+                <strong><span style="font-size: larger">{{ footballer.club.name }}</span></strong>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <br>
+                <span style="font-size: larger">Nation: <strong>{{ footballer.nation }}</strong></span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <br>
+                <span style="font-size: larger">Date of birth: <strong>{{ footballer.date_of_birth }}</strong></span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <hr>
+    <table align="center" class="table-responsive" style="display: table; table-layout: fixed; width: 100%;">
+        <thead>
+        <tr align="center">
+            <th>
+                Matches
+            </th>
+            <th>
+                Goals
+            </th>
+            <th>
+                Assists
+            </th>
+
+            <th>
+                Cards
+            </th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <td align="center">
+            {{ footballer.presences.count }}
+        </td>
+        <td align="center">
+            {{ footballer.goals.count }}
+        </td>
+        <td align="center">
+            {{ footballer.assists.count }}
+        </td>
+        <td align="center">
+            <div align="center">
+                 {{ footballer.yellow_cards.count }} <img src="{% static 'icons/yellow card.png' %}"
+                     style="height: 30px; width: 23px; margin-right: 10px">
+                {{ footballer.red_cards.count }} <img src="{% static 'icons/red card.png' %}"
+                     style="height: 30px; width: 23px">
+            </div>
+        </td>
+        </tbody>
+    </table>
+{% endblock content %}

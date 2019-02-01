@@ -1,0 +1,124 @@
+MANIFEST.in
+manage.py
+setup.py
+ChampionsLeagueManager/__init__.py
+ChampionsLeagueManager/settings.py
+ChampionsLeagueManager/urls.py
+ChampionsLeagueManager/wsgi.py
+core/__init__.py
+core/admin.py
+core/apps.py
+core/models.py
+core/tests.py
+core/views.py
+core/migrations/0001_initial.py
+core/migrations/0002_auto_20190101_1810.py
+core/migrations/0003_footballer_nation.py
+core/migrations/0004_auto_20190109_2337.py
+core/migrations/0005_auto_20190110_1625.py
+core/migrations/0006_auto_20190110_1632.py
+core/migrations/0007_match_date.py
+core/migrations/0008_redcard_double_yellow.py
+core/migrations/0009_club_stadium.py
+core/migrations/0010_auto_20190114_1432.py
+core/migrations/0011_auto_20190114_1620.py
+core/migrations/0012_substitution_minute.py
+core/migrations/0013_auto_20190115_1427.py
+core/migrations/0014_groupmatch_day.py
+core/migrations/0015_auto_20190125_1318.py
+core/migrations/0016_auto_20190130_1146.py
+core/migrations/0017_auto_20190130_1457.py
+core/migrations/0018_auto_20190130_1500.py
+core/migrations/__init__.py
+core/templates/base.html
+core/templates/base_navigation_bar.html
+core/templates/calendar.html
+core/templates/club_details.html
+core/templates/clubs.html
+core/templates/footballer_details.html
+core/templates/groups.html
+core/templates/homepage.html
+core/templates/match_details.html
+core/templatetags/__init__.py
+core/templatetags/filters.py
+core/templatetags/tags.py
+django_champions_league_manager.egg-info/PKG-INFO
+django_champions_league_manager.egg-info/SOURCES.txt
+django_champions_league_manager.egg-info/dependency_links.txt
+django_champions_league_manager.egg-info/top_level.txt
+static/jquery.min.js
+static/popper.min.js
+static/bootstrap/css/bootstrap-grid.css
+static/bootstrap/css/bootstrap-grid.css.map
+static/bootstrap/css/bootstrap-grid.min.css
+static/bootstrap/css/bootstrap-grid.min.css.map
+static/bootstrap/css/bootstrap-reboot.css
+static/bootstrap/css/bootstrap-reboot.css.map
+static/bootstrap/css/bootstrap-reboot.min.css
+static/bootstrap/css/bootstrap-reboot.min.css.map
+static/bootstrap/css/bootstrap-theme.css
+static/bootstrap/css/bootstrap-theme.css.map
+static/bootstrap/css/bootstrap-theme.min.css
+static/bootstrap/css/bootstrap-theme.min.css.map
+static/bootstrap/css/bootstrap.css
+static/bootstrap/css/bootstrap.css.map
+static/bootstrap/css/bootstrap.min.css
+static/bootstrap/css/bootstrap.min.css.map
+static/bootstrap/fonts/glyphicons-halflings-regular.eot
+static/bootstrap/fonts/glyphicons-halflings-regular.svg
+static/bootstrap/fonts/glyphicons-halflings-regular.ttf
+static/bootstrap/fonts/glyphicons-halflings-regular.woff
+static/bootstrap/fonts/glyphicons-halflings-regular.woff2
+static/bootstrap/js/bootstrap.bundle.js
+static/bootstrap/js/bootstrap.bundle.js.map
+static/bootstrap/js/bootstrap.bundle.min.js
+static/bootstrap/js/bootstrap.bundle.min.js.map
+static/bootstrap/js/bootstrap.js
+static/bootstrap/js/bootstrap.js.map
+static/bootstrap/js/bootstrap.min.js
+static/bootstrap/js/bootstrap.min.js.map
+static/bootstrap/js/npm.js
+static/css/master.css
+static/fonts/Novarese Medium.ttf
+static/icons/AEK.png
+static/icons/Ajax.png
+static/icons/Atletico Madrid.png
+static/icons/Barcelona.png
+static/icons/Bayern München.png
+static/icons/Benfica.png
+static/icons/Borussia Dortmund.png
+static/icons/CSKA Moscow.jpg
+static/icons/CSKA Moscow.png
+static/icons/Club Brugge.png
+static/icons/Crvena Zvezda.png
+static/icons/Galatasaray.png
+static/icons/Hoffenheim.png
+static/icons/Internazionale.png
+static/icons/Juventus.png
+static/icons/Liverpool.png
+static/icons/Lokomotiv Moskva.png
+static/icons/Lyon.png
+static/icons/Manchester City.png
+static/icons/Manchester United.png
+static/icons/Monaco.png
+static/icons/Napoli.png
+static/icons/PSV.png
+static/icons/Paris Saint-Germain.jpg
+static/icons/Paris Saint-Germain.png
+static/icons/Porto.png
+static/icons/Real Madrid.png
+static/icons/Roma.png
+static/icons/Schalke 04.png
+static/icons/Shakhtar Donetsk.png
+static/icons/Tottenham Hotspur.png
+static/icons/Valencia.png
+static/icons/Viktoria Plzeň.png
+static/icons/Young Boys.png
+static/icons/double yellow.png
+static/icons/red card.png
+static/icons/score.png
+static/icons/sub.png
+static/icons/yellow card.png
+static/images/champions-league-logo.jpg
+static/images/favicon.png
+static/images/footballer.png

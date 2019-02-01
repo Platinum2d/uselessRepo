@@ -1,0 +1,283 @@
+{% extends "base_navigation_bar.html" %}
+{% load static %}
+
+{% block title %}{{ match }}{% endblock title %}
+
+{% block content %}
+    <br><br>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div align="center" class="col-md-3">
+            <img onclick="window.location.href='{{ match.home_club.get_absolute_url }}'" id="logo-reference"
+                 style="cursor: pointer" src="{% static 'icons/' %}{{ match.home_club }}.png"><br><br>
+            {{ match.home_club.name }}
+        </div>
+        <div style="text-align:center;" align="center" class="col-md-4" id="result-container">
+            <h1>{{ home_club.score }} - {{ away_club.score }}</h1>
+            <span>Stadium: {{ match.home_club.stadium }}</span><br>
+            <span>Referee: {{ match.referee }}</span>
+        </div>
+        <div align="center" class="col-md-3">
+            <img onclick="window.location.href='{{ match.away_club.get_absolute_url }}'"
+                 style="cursor: pointer" src="{% static 'icons/' %}{{ match.away_club }}.png"><br><br>
+            {{ match.away_club.name }}
+        </div>
+        <div align="center" class="col-md-1">
+
+        </div>
+    </div>
+
+    <br><br>
+    <ul class="nav nav-tabs nav-justified">
+        <li class="active nav-item"><a class="nav-link active show" data-toggle="tab" href="#scoreboard">Scoreboard</a>
+        </li>
+        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#subs&cards">Subs & Cards</a></li>
+        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#startingXI">Starting XI</a></li>
+    </ul>
+
+    <div class="tab-content tab-pane fade active show">
+        <div id="scoreboard" class="tab-pane fade active show">
+            <br>
+            <div class="row">
+                <div align="left" class="offset-1 col-sm-4">
+                    {% for goal in home_club.goals %}
+                        <table>
+                            <thead></thead>
+                            <tbody>
+                            <tr>
+                                <td style="vertical-align: middle; padding-right: 15px">
+                                    <img class="score" src="{% static 'icons/score.png' %}">
+                                </td>
+                                <td style="vertical-align: middle; padding-right: 15px">
+                                    {{ goal.minute }}'
+                                </td>
+                                <td style="vertical-align: middle">
+                                    <strong>{{ goal.scorer }}</strong>
+                                    {% if goal.assist_man %}
+                                        <br>
+                                        Assist: {{ goal.assist_man }}
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <br>
+                    {% endfor %}
+                </div>
+                <div class="col-sm-2">
+
+                </div>
+                <div align="right" class="col-sm-4">
+                    {% for goal in away_club.goals %}
+                        <table>
+                            <thead></thead>
+                            <tbody>
+                            <tr align="right">
+                                <td style="vertical-align: middle;">
+                                    <strong>{{ goal.scorer }}</strong>
+                                    {% if goal.assist_man %}
+                                        <br>
+                                        Assist: {{ goal.assist_man }}
+                                    {% endif %}
+                                </td>
+                                <td style="vertical-align: middle; padding-left: 15px">
+                                    {{ goal.minute }}'
+                                </td>
+                                <td  style="vertical-align: middle; padding-left: 15px">
+                                    <img class="score" src="{% static 'icons/score.png' %}">
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <br>
+                    {% endfor %}
+                </div>
+                <div class="col-sm-1">
+
+                </div>
+            </div>
+        </div>
+        <div id="subs&cards" class="tab-pane fade">
+            <br>
+            <div class="row">
+                <div align="left" class="offset-1 col-sm-4">
+                    {% for card in home_club.cards %}
+                        <table>
+                            <thead></thead>
+                            <tbody>
+                            <tr>
+                                <td style="padding-right: 15px">
+                                    {% if card.get_class_name == 'YellowCard' %}
+                                        <img src="{% static 'icons/' %}yellow card.png"
+                                             style="height: 30px; width: 23px;">
+                                    {% else %}
+                                        {% if card.double_yellow %}
+                                            <img src="{% static 'icons/' %}double yellow.png"
+                                                 style="height: 30px; width: 23px;">
+                                        {% else %}
+                                            <img src="{% static 'icons/' %}red card.png"
+                                                 style="height: 30px; width: 23px;">
+                                        {% endif %}
+                                    {% endif %}
+                                </td>
+                                <td style="padding-right: 15px">
+                                    {{ card.minute }}'
+                                </td>
+                                <td>
+                                    <strong>
+                                        {% if card.get_class_name == 'YellowCard' %}
+                                            {{ card.admonished }}
+                                        {% else %}
+                                            {{ card.expelled }}
+                                        {% endif %}
+                                    </strong>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <br>
+                    {% endfor %}
+                </div>
+                <div class="col-sm-2">
+
+                </div>
+                <div align="right" class="col-sm-4">
+                    {% for card in away_club.cards %}
+                        <table>
+                            <thead></thead>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <strong>
+                                        {% if card.get_class_name == 'YellowCard' %}
+                                            {{ card.admonished }}
+                                        {% else %}
+                                            {{ card.expelled }}
+                                        {% endif %}
+                                    </strong>
+                                </td>
+                                <td style="padding-left: 15px">
+                                    {{ card.minute }}'
+                                </td>
+                                <td style="padding-left: 15px">
+                                    {% if card.get_class_name == 'YellowCard' %}
+                                        <img src="{% static 'icons/' %}yellow card.png"
+                                             style="height: 30px; width: 23px;">
+                                    {% else %}
+                                        {% if card.double_yellow %}
+                                            <img src="{% static 'icons/' %}double yellow.png"
+                                                 style="height: 30px; width: 23px;">
+                                        {% else %}
+                                            <img src="{% static 'icons/' %}red card.png"
+                                                 style="height: 30px; width: 23px;">
+                                        {% endif %}
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <br>
+                    {% endfor %}
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div align="left" class="offset-1 col-sm-4">
+                    {% for sub in home_club.subs %}
+                        <table>
+                            <thead></thead>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <img src="{% static 'icons/' %}sub.png" class="sub">
+                                </td>
+                                <td style="padding-left: 10px">
+                                    {{ sub.minute }}'
+                                </td>
+                                <td align="left" style="padding-left: 15px">
+                                    <strong>{{ sub.replacement }}</strong><br>
+                                    {{ sub.replaced }}
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <br>
+                    {% endfor %}
+                </div>
+
+                <div class="col-sm-2">
+
+                </div>
+
+                <div align="right" class="col-sm-4">
+                    {% for sub in away_club.subs %}
+                        <table>
+                            <thead></thead>
+                            <tbody>
+                            <tr>
+                                <td align="right" style="padding-right: 15px">
+                                    <strong>{{ sub.replacement }}</strong><br>
+                                    {{ sub.replaced }}
+                                </td>
+                                <td style="padding-right: 10px">
+                                    {{ sub.minute }}'
+                                </td>
+                                <td>
+                                    <img src="{% static 'icons/' %}sub.png" class="sub">
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <br>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div id="startingXI" class="tab-pane fade">
+            <div class="row">
+                <div class="col-sm-1"></div>
+                <div align="left" class="col-sm-4">
+                    <br>
+                    {% for presence in home_club.starting_XI %}
+                        <span class="player-match-details"> <strong>{{ presence.footballer.number }}</strong> {{ presence.footballer }}</span>
+                        <hr>
+                    {% endfor %}
+
+                    <br><br>
+                    <h3>Bench</h3>
+                    <br>
+                    {% for presence in home_club.bench %}
+                        <span class="player-match-details"><strong>{{ presence.footballer.number }}</strong> {{ presence.footballer }}</span>
+                        <hr>
+                    {% endfor %}
+                </div>
+                <div align="right" class="offset-2 col-sm-4">
+                    <br>
+                    {% for presence in away_club.starting_XI %}
+                        <span  >{{ presence.footballer }} <strong>{{ presence.footballer.number }}</strong></span>
+                        <hr>
+                    {% endfor %}
+
+                    <br><br>
+                    <h3>Bench</h3>
+                    <br>
+                    {% for presence in away_club.bench %}
+                        <span class="player-match-details">{{ presence.footballer }} <strong>{{ presence.footballer.number }}</strong></span>
+                        <hr>
+                    {% endfor %}
+                </div>
+                <div class="col-sm-1"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $("#result-container > h1").css({
+            "line-height": $("#logo-reference").height() + 'px',
+            "margin": "auto",
+            "vertical-align": "middle"
+        });
+
+        $("#scoreboard").trigger("click");
+    </script>
+{% endblock content %}

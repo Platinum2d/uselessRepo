@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Homepage{% endblock title %}
+
+{% block body %}
+    <div class="container" align="center">
+        <br>
+        <img src="{% static 'images/champions-league-logo.jpg' %}" style="max-width: 100%; height: 400px">
+        <br><br>
+
+        <table class="table table-hover">
+            <thead></thead>
+            <tbody>
+            <tr>
+                <td style="text-align: center; border-top: transparent"><a href="calendar"><h3>Calendar</h3></a></td>
+            </tr>
+            <tr>
+                <td style="text-align: center;"><a href="groups"><h3>Groups</h3></a></td>
+            </tr>
+            <tr>
+                <td style="text-align: center;"><a href="clubs"><h3>Clubs</h3></a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock body %}
+

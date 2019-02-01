@@ -1,0 +1,43 @@
+{% extends "base_navigation_bar.html" %}
+{% load static %}
+{% load filters %}
+
+{% block title %}Clubs{% endblock title %}
+
+{% block content %}
+    <div align="center">
+    <br>
+        <table class="table table-hover table-responsive">
+            <thead></thead>
+            <tbody>
+            <tr>
+                {% for i in "0,8"|iterate_in_range %}
+                    <td style="border-top: transparent; vertical-align: middle" align="center"><a href="{{ clubs|absolute_url:i }}" class="club-box">{{ clubs|index:i }}</a></td>
+                {% endfor %}
+            </tr>
+            <tr>
+                {% for i in "8,16"|iterate_in_range %}
+                    <td style="vertical-align: middle" align="center"><a href="{{ clubs|absolute_url:i }}" class="club-box">{{ clubs|index:i }}</a></td>
+                {% endfor %}
+            </tr>
+            <tr>
+                {% for i in "16,24"|iterate_in_range %}
+                    <td style="vertical-align: middle" align="center"><a href="{{ clubs|absolute_url:i }}" class="club-box">{{ clubs|index:i }}</a></td>
+                {% endfor %}
+            </tr>
+            <tr>
+                {% for i in "24,32"|iterate_in_range %}
+                    <td style="vertical-align: middle" align="center"><a href="{{ clubs|absolute_url:i }}" class="club-box">{{ clubs|index:i }}</a></td>
+                {% endfor %}
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        $(".club-box").each(function(){
+            let icon_name = $(this).text();
+            $(this).prepend("<img class=\"clubs-list-club-logo\" src=\"{% static 'icons/' %}"+icon_name+".png\"><br>")
+        })
+    </script>
+{% endblock content %}

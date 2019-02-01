@@ -1,0 +1,65 @@
+@font-face {
+    font-family: ChampionsLeagueFont;
+    src: url("../fonts/Novarese Medium.ttf");
+}
+
+.champions_style {
+    font-family: ChampionsLeagueFont;
+}
+
+#main-navbar {
+    background: linear-gradient(90deg, #0e1e5b, #091442, #3562a6, #6594c0, #0b0b0b)
+}
+
+.main-navbar-link {
+    color: white;
+}
+
+.main-navbar-link:hover {
+    background: white;
+}
+
+.clubs-list-club-logo {
+    height: 60px;
+    width: 60px;
+}
+
+.clubs-list-club-container {
+    border-top: transparent;
+}
+
+.matches-club-logo {
+    height: 40px;
+    width: 40px;
+}
+
+.group-ranking-club-logo {
+    height: 40px;
+    width: 40px;
+}
+
+.player-match-details {
+    font-size: 17px;
+}
+
+.card {
+    border: none;
+    height: 30px;
+    width: 23px;
+}
+
+.sub {
+    height: 30px;
+    width: 30px;
+}
+
+.score {
+    height: 25px;
+    width: 25px;
+}
+
+.table-data-match{
+    vertical-align: middle;
+    border-top: transparent;
+
+}

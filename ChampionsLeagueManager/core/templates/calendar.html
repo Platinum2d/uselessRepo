@@ -1,0 +1,149 @@
+{% extends "base_navigation_bar.html" %}
+{% load static %}
+
+{% block title %}Calendar{% endblock title %}
+
+{% block content %}
+    <br>
+    <div class="form-group" align="center">
+        <label for="sel">Show calendar for </label>
+        <select style="width:auto;" class="form-control" id="sel">
+            <option>Groups</option>
+            <option>Knockouts</option>
+        </select>
+    </div>
+    <br>
+    <div id="groups-calendar-container">
+        <ul class="nav nav-tabs nav-justified">
+            <li class="active nav-item"><a class="nav-link active show" data-toggle="tab" href="#day1">1st day</a></li>
+            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#day2">2nd day</a></li>
+            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#day3">3rd day</a></li>
+            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#day4">4th day</a></li>
+            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#day5">5th day</a></li>
+            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#day6">6th day</a></li>
+        </ul>
+        <div class="tab-content">
+            {% for day_entry in groups_calendar %}
+                {% if day_entry.day == 1 %}
+                    <div id="day{{ day_entry.day }}" class="tab-pane fade active show">
+                {% else %}
+                    <div id="day{{ day_entry.day }}" class="tab-pane fade">
+                {% endif %}
+            <table style="display: table; table-layout: fixed; width: 100%;"
+                   class="table table-hover table-responsive">
+                <thead></thead>
+                <tbody>
+                {% for match_entry in day_entry.matches %}
+                    <tr style="cursor: pointer; "
+                        onclick="window.location.href='{{ match_entry.match_object.referred_match.get_absolute_url }}'">
+                        <td style="vertical-align: middle" align="center">
+                            <img class="matches-club-logo"
+                                 src="{% static 'icons/' %}{{ match_entry.match_object.referred_match.home_club.name }}.png"><br>
+                            <a href="{{ match_entry.match_object.referred_match.home_club.get_absolute_url }}">
+                                {{ match_entry.match_object.referred_match.home_club }}</a>
+                        </td>
+                        <td align="center" style="vertical-align: middle">
+                            <h1>{{ match_entry.home_score }} - {{ match_entry.away_score }}</h1>
+                            <p style="margin: 0px">{{ match_entry.match_object.referred_match.date }}</p>
+                        </td>
+                        <td align="center" style="vertical-align: middle">
+                            <img class="matches-club-logo"
+                                 src="{% static 'icons/' %}{{ match_entry.match_object.referred_match.away_club.name }}.png"><br>
+                            <a href="{{ match_entry.match_object.referred_match.away_club.get_absolute_url }}">
+                                {{ match_entry.match_object.referred_match.away_club }}</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            </div>
+            {% endfor %}
+            </div>
+        </div>
+
+        <div id="knockouts-calendar-container">
+            <ul class="nav nav-tabs nav-justified">
+                <li class="active nav-item"><a class="nav-link active show" data-toggle="tab" href="#turn1">Round of
+                    16</a>
+                </li>
+                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#turn2">Quarter finals</a></li>
+                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#turn3">Semi finals</a></li>
+                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#turn4">Final</a></li>
+            </ul>
+            <div class="tab-content">
+                {% for turn_entry in knockouts_calendar %}
+                    {% if turn_entry.turn == 1 %}
+                        <div id="turn{{ turn_entry.turn }}" class="tab-pane fade active show">
+                    {% else %}
+                        <div id="turn{{ turn_entry.turn }}" class="tab-pane fade">
+                    {% endif %}
+                <table style="display: table; table-layout: fixed; width: 100%;"
+                       class="table table-hover table-responsive">
+                    <thead></thead>
+                    <tbody>
+                    {% for match_entry in turn_entry.matches %}
+                        <tr style="cursor: pointer; "
+                            onclick="window.location.href='{{ match_entry.match_object.referred_match.get_absolute_url }}'">
+                            <td style="vertical-align: middle" align="center">
+                                <img class="matches-club-logo"
+                                     src="{% static 'icons/' %}{{ match_entry.match_object.referred_match.home_club.name }}.png"><br>
+                                <a href="{{ match_entry.match_object.referred_match.home_club.get_absolute_url }}">
+                                    {{ match_entry.match_object.referred_match.home_club }}</a>
+                            </td>
+                            <td align="center" style="vertical-align: middle">
+                                <h1>{{ match_entry.home_score }} - {{ match_entry.away_score }}</h1>
+                                <p style="margin: 0px">{{ match_entry.match_object.referred_match.date }}</p>
+                            </td>
+                            <td align="center" style="vertical-align: middle">
+                                <img class="matches-club-logo"
+                                     src="{% static 'icons/' %}{{ match_entry.match_object.referred_match.away_club.name }}.png"><br>
+                                <a href="{{ match_entry.match_object.referred_match.away_club.get_absolute_url }}">
+                                    {{ match_entry.match_object.referred_match.away_club }}</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                </div>
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $("document").ready(function () {
+            goToGroups();
+            $("#sel").on("change", function () {
+                let selected = $("#sel").prop('selectedIndex');
+                if (selected === 0)
+                    goToGroups();
+                else
+                    goToKnockout();
+            });
+        });
+
+        $("#groups-calendar-container").find("table").each(function () {
+            $(this).find("tr").first().find("td").each(function () {
+                $(this).css("border-top", "transparent");
+            });
+        });
+
+        $("#knockouts-calendar-container").find("table").each(function () {
+            $(this).find("tr").first().find("td").each(function () {
+                $(this).css("border-top", "transparent");
+            });
+        });
+
+        function goToGroups() {
+            $("#knockouts-calendar-container").hide();
+            $("#groups-calendar-container").show();
+        }
+
+        function goToKnockout() {
+            $("#groups-calendar-container").hide();
+            $("#knockouts-calendar-container").show();
+        }
+
+    </script>
+{% endblock content %}

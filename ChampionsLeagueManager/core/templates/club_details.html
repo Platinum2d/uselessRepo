@@ -1,0 +1,106 @@
+{% extends "base_navigation_bar.html" %}
+{% load static %}
+
+{% block title %}{{ club.name }}{% endblock title %}
+
+
+{% block content %}
+    <br>
+    <div align="center">
+        <div class="row">
+            <div class="offset-3 col-sm-6">
+                <img src="{% static 'icons/' %}{{ club.name }}.png">
+                <h1>{{ club.name }}</h1>
+            </div>
+            <div class="col-sm-3" align="right">
+                <strong>Coach</strong>: {{ club.coach }}<br>
+                <strong>Stadium</strong>: {{ club.stadium }}
+            </div>
+        </div>
+
+        <br><br>
+        <ul class="nav nav-tabs nav-justified">
+            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#matches">Matches</a></li>
+            <li class="active nav-item"><a class="nav-link active show" data-toggle="tab" href="#players">Players</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="matches" class="tab-pane fade">
+                <table style="display: table; table-layout: fixed; width: 100%;"
+                       class="table table-hover table-responsive">
+                    <thead></thead>
+                    <tbody>
+                    {% for match in home_matches %}
+                        <tr style="cursor: pointer" onclick="window.location.href='{{ match.match_object.get_absolute_url }}'">
+                            <td style="vertical-align: middle" align="center">
+                                <img class="matches-club-logo" src="{% static 'icons/' %}{{ club.name }}.png"><br>
+                                {{ club.name }}
+                            </td>
+                            <td align="center" style="vertical-align: middle">
+                                <h1>{{ match.club_score }} - {{ match.other_score }}</h1>
+                                <p style="margin: 0px">{{ match.match_object.date }}</p>
+                            </td>
+                            <td align="center" style="vertical-align: middle">
+                                <img class="matches-club-logo" src="{% static 'icons/' %}{{ match.away_club }}.png"><br>
+                                <a href="{{ match.away_club.get_absolute_url }}">{{ match.away_club }}</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    {% for match in away_matches %}
+                        <tr style="cursor: pointer" onclick="window.location.href='{{ match.match_object.get_absolute_url }}'">
+                            <td style="vertical-align: middle" align="center">
+                                <img class="matches-club-logo" src="{% static 'icons/' %}{{ match.home_club }}.png"><br>
+                                <a href="{{ match.home_club.get_absolute_url }}">{{ match.home_club }}</a>
+                            </td>
+                            <td style="vertical-align: middle" align="center">
+                                <h1>{{ match.other_score }} - {{ match.club_score }}</h1>
+                                <p style="margin: 0px">{{ match.match_object.date }}</p>
+                            </td>
+                            <td style="vertical-align: middle" align="center">
+                                <img class="matches-club-logo" src="{% static 'icons/' %}{{ club.name }}.png"><br>
+                                {{ club.name }}
+                            </td>
+
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div id="players" class="tab-pane fade active show">
+                <table style="display: table; table-layout: fixed; width: 100%;"
+                       class="table table-hover table-responsive">
+                    <!--<thead>
+                    <tr>
+                        <th style="text-align: center; border-top: transparent">Image</th>
+                        <th style="text-align: center; border-top: transparent">Number</th>
+                        <th style="text-align: center; border-top: transparent">Name and surname</th>
+                        <th style="text-align: center; border-top: transparent">Nation</th>
+                        <th style="text-align: center; border-top: transparent">Date of birth</th>
+                    </tr>
+                    </thead>-->
+                    <tbody>
+                    {% for footballer in club.footballers.all %}
+                        <tr style="cursor: pointer" onclick="window.location.href='{{ footballer.get_absolute_url }}'">
+                            <td align="center"><img style="height: 30px; width: 30px" src="{% static 'icons/' %}{{ club.name }}.png"></td>
+                            <td align="center">{{ footballer.number }}</td>
+                            <td align="center">{{ footballer.name }} {{ footballer.surname }}</td>
+                            <td align="center">{{ footballer.nation }}</td>
+                            <td align="center">{{ footballer.date_of_birth }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $("#players").find("tr").first().find("td").each(function () {
+            $(this).css("border-top", "transparent");
+        });
+
+        $("#matches").find("tr").first().find("td").each(function () {
+            $(this).css("border-top", "transparent");
+        });
+    </script>
+{% endblock content %}
